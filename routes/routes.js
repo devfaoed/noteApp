@@ -1,12 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-const passport = require('passport')
+const passport = require("passport");
 
 // Require Models
 const Users = require("../models/Users");
 const Notes = require("../models/Notes");
-
 
 // Description      Renders Login Screen
 router.get("/", function (req, res) {
@@ -14,13 +13,13 @@ router.get("/", function (req, res) {
 });
 
 // Description  Handle login functionality
-router.post('/', function(req, res, next){
-  passport.authenticate('local', {
+router.post("/", function (req, res, next) {
+  passport.authenticate("local", {
     successRedirect: "/dashboard",
     failureRedirect: "/",
-    failureFlash: true
-  })(req, res, next)
-})
+    failureFlash: true,
+  })(req, res, next);
+});
 
 // Description      Renders Signup Screen
 router.get("/signup", function (req, res) {
@@ -88,25 +87,68 @@ router.get("/add-note", function (req, res) {
   res.render("./dashboard/Addnote");
 });
 
-router.post('/add-note', function(req, res){
+router.post("/add-note", function (req, res) {
   const newNote = new Notes({
     title: req.body.title,
     note: req.body.note,
-    author: req.user.email
-  })
-  newNote.save().then(function(success){
-    req.flash("success_message", "Note added successfully")
-    res.redirect('/all-notes')
-  })
-})
+    author: req.user.email,
+  });
+  newNote.save().then(function (success) {
+    req.flash("success_message", "Note added successfully");
+    res.redirect("/all-notes");
+  });
+});
+
+// Description  Render Single Notes Page
+router.get("/note/:id", function (req, res) {
+  const singleNote = req.params.id;
+  Notes.findById(singleNote).then(function (note) {
+    res.render("./dashboard/singlenote", {
+      note: note,
+    });
+  });
+});
 
 // Description  Render All Notes Page
 router.get("/all-notes", function (req, res) {
-  Notes.find({author: req.user.email}).then(function(notes){
+  Notes.find({ author: req.user.email }).then(function (notes) {
     res.render("./dashboard/Allnotes", {
-      notes: notes
+      notes: notes,
     });
-  })      
+  });
+});
+
+// Description  Render update Note Page
+router.get("/note/:id/update-note", function (req, res) {
+  const singleNote = req.params.id;
+  Notes.findById(singleNote).then(function (note) {
+    res.render("./dashboard/updatenote", {
+      note: note,
+    });
+  });
+});
+
+// Description  Render update Notes Page
+router.post("/note/:id/update-note", function (req, res) {
+  let newNote = {
+    title: req.body.title,
+    note: req.body.note,
+  };
+  Notes.findByIdAndUpdate(req.params.id, newNote, {
+    new: true,
+    runValidators: true,
+  }).then(function (success) {
+    req.flash("success_message", "Note updated successfully");
+    res.redirect("/all-notes");
+  });
+});
+
+// Description  Delete a certain note
+router.get("/all-notes/:id/delete", function (req, res) {
+  Notes.findByIdAndDelete(req.params.id).then(function (deletenote) {
+    req.flash("success_message", "Note deleted successfully");
+    res.redirect("/all-notes");
+  });
 });
 
 // Profile

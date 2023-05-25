@@ -4,22 +4,22 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>All Notes | Notebook PRO</title>
+    <title>Signle Note | Notebook PRO</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="./vendors/daterangepicker/daterangepicker.css">
-    <link rel="stylesheet" href="./vendors/chartist/chartist.min.css">
+    <link rel="stylesheet" href="../vendors/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href=".../vendors/chartist/chartist.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="./images/favicon.png" />
+    <link rel="shortcut icon" href="../images/favicon.png" />
   </head>
   <body>
     <div class="container-scroller">
@@ -27,9 +27,9 @@
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="navbar-brand-wrapper d-flex align-items-center">
           <a class="navbar-brand brand-logo" href="index.html">
-            <img src="images/logo.svg" alt="logo" class="logo-dark" />
+            <img src="../images/logo.svg" alt="logo" class="logo-dark" />
           </a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../images/logo-mini.svg" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
           <h5 class="mb-0 font-weight-medium d-none d-lg-flex">Welcome stallar dashboard!</h5>
@@ -41,10 +41,10 @@
          
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> Henry Klein </span></a>
+                <img class="img-xs rounded-circle ml-2" src="../images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> Henry Klein </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
+                  <img class="img-md rounded-circle" src="../images/faces/face8.jpg" alt="Profile image">
                   <p class="mb-1 mt-3">Allen Moreno</p>
                   <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
                 </div>
@@ -66,7 +66,7 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="profile image">
+                  <img class="img-xs rounded-circle" src="../images/faces/face8.jpg" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
@@ -109,41 +109,27 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">All Notes</h4>
+                    <h4 class="card-title"><%= note.title %> </h4>
                     <!-- <p class="card-description"> Add class <code>.table-striped</code> -->
                     </p>
                     <table class="table table-striped">
                       <thead>
                         <tr>
                           <th> Title </th>
-                          <th> Notes </th>
+                          <th> Note </th>
                           <th> Date added </th>
-                          <th> Action </th>
-                          <th>  </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <% notes.forEach(function(note){ %>
                           <tr>
-                           
-                              <td class="py-1">
-                                <a href="/note/<%= note._id %>"><%= note.title %></a>
+                            <td class="py-1">
+                              <%= note.title %>
                             </td>
-                           
-                            <td> <a href="/note/<%= note._id %>"><%= note.note.length > 30 ?  note.note.substring(0, 30) + '...' : note.note %></a>
-                            </td>
+                            <td><%=  note.note %></td>
                             <td>
-                              <a href="/note/<%= note._id %>"><%= note.createdAt %></a>
-                            </td>
-                            <td>
-                              <a href="/note/<%= note._id %>/update-note">Edit</a>
-                            </td>
-                            <td>
-                              <a href="/all-notes/<%= note._id %>/delete">Delete</a>
+                              <%= note.createdAt %>
                             </td>
                           </tr>
-                        <% }) %>
-                      
                       </tbody>
                     </table>
                   </div>
@@ -166,20 +152,20 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <script src="../vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="./vendors/chart.js/Chart.min.js"></script>
-    <script src="./vendors/moment/moment.min.js"></script>
-    <script src="./vendors/daterangepicker/daterangepicker.js"></script>
-    <script src="./vendors/chartist/chartist.min.js"></script>
+    <script src="../vendors/chart.js/Chart.min.js"></script>
+    <script src="../vendors/moment/moment.min.js"></script>
+    <script src="../vendors/daterangepicker/daterangepicker.js"></script>
+    <script src="../vendors/chartist/chartist.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="js/off-canvas.js"></script>
-    <script src="js/misc.js"></script>
+    <script src="../js/off-canvas.js"></script>
+    <script src="../js/misc.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script src="./js/dashboard.js"></script>
+    <script src="../js/dashboard.js"></script>
     <!-- End custom js for this page -->
   </body>
 </html>
